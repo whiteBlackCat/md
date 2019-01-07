@@ -36,11 +36,13 @@ url会自动生成超链接,如: www.baidu.com
 ##### 插入图片
 `mention: github仓库图片url格式:https://github.com/ 你的用户名 / 你的项目名 / raw / 分支名 / 存放图片的文件夹 / 该文件夹下的图片 <br>`
 ![百度图片](http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg)<br>
-
-##### 图片超链接 中间的换行必不可少
+或者 中间的换行必不可少<br>
 ![image][image.baidu.com]
 
 [image.baidu.com]: http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg "失落王冠"
+
+##### 图片超链接 
+[![失落王冠女主角](http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg "失落王冠")](http://image.baidu.com)
 
 ###### 代码块 
 ``` html
