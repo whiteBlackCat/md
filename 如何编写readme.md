@@ -8,11 +8,11 @@
 这也是个中标题,是二级标题,下划线/星号至少连续3个(有人说这是虚线???)
 ___
 
-*****
+***
   
-# 这是个一级标题,行首尾的#及空格符不可少 #
+# 这是个一级标题,行首的#及空格符不可少 
   
-## 这是个二级标题 ##
+## 这是个二级标题 
 
 html部分用法
 =
@@ -33,14 +33,14 @@ url会自动生成超链接,如: www.baidu.com
   
 >> 缩进两个字符
 
-插入图片 ![string](url "title") <br>
-mention: github仓库图片url格式:https://github.com/ 你的用户名 / 你的项目名 / raw / 分支名 / 存放图片的文件夹 / 该文件夹下的图片 <br>
+##### 插入图片
+`mention: github仓库图片url格式:https://github.com/ 你的用户名 / 你的项目名 / raw / 分支名 / 存放图片的文件夹 / 该文件夹下的图片 <br>`
 ![百度图片](http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg)<br>
 
-##### 图片超链接
-![image][logo]
+##### 图片超链接 中间的换行必不可少
+![image][image.baidu.com]
 
-[logo]: http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg "失落王冠"
+[image.baidu.com]: http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg "失落王冠"
 
 ###### 代码块 
 ``` html
