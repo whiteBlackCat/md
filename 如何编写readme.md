@@ -37,11 +37,14 @@ url会自动生成超链接,如: www.baidu.com
 mention: github仓库图片url格式:https://github.com/ 你的用户名 / 你的项目名 / raw / 分支名 / 存放图片的文件夹 / 该文件夹下的图片 <br>
 ![百度图片](http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg)<br>
 
-图片超链接
-[![image](http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg "失落王冠")](https://image.baidu.com/)
+##### 图片超链接
+![image][logo]
 
-###### 代码块 ######
+[logo]: http://img-arch.pconline.com.cn/images/upload/upc/tx/wallpaper/1301/18/c2/17511503_1358489314557.jpg "失落王冠"
+
+###### 代码块 
 ``` html
   <h1>下面是鲁路修sama地址</h1>
   <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546851686601&di=c8d9e9a58c2795f778215e0b5f483f09&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fblog%2F201401%2F12%2F20140112233147_Kj5xx.thumb.700_0.jpeg">
 ```
+
