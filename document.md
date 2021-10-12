@@ -134,3 +134,74 @@ console.log(totp); // 683464
 5. 非需要则不使用捕获
 6. 宁简勿繁。将一条复杂的正则表达式拆分为两条或多条简单的正则表达式，编程难度会降低，运行效率会提升。
 
+## sublime
+
+### 安装插件
+
+首先安装包管理
+
+#### Package Control
+
+安装方法：
+
+1. CTRL+` ，出现控制台
+2. 粘贴以下代码至控制台
+`import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)`
+
+#### 推荐插件
+
+Emmet,JSFormat,LESS,Less2CSS,Alignment,sublime-autoprefixer,Bracket Highlighter,Git,jQuery,DocBlockr,Color​Picker,AutoFileName,Nodejs,Trailing spaces,FileDiffs,GBK Encoding Support,Git​Gutter
+
+### 使用node环境
+
+1. 下载Nodejs插件，下载地址为：[https://github.com/tanepiper/SublimeText-Nodejs](https://github.com/tanepiper/SublimeText-Nodejs).解压后文件名改为Nodejs
+2. 打开Sublime Text3，点击菜单“Perferences” =>“Browse Packages”打开“Packages”文件夹，并将第1部的Nodejs文件夹剪切进来
+3. 打开文件“Nodejs.sublime-build”，将代码 "encoding": "cp1252" 改为 "encoding": "utf8" ，将代码 "cmd": ["taskkill /F /IM node.exe & node", "$file"] 改为 "cmd": ["node", "$file"] ，保存文件
+4. 打开文件“Nodejs.sublime-settings”，将代码 "node_command": false改为 "node_command": "D:\\Program Files\\nodejs\\node.exe" ，将代码 "npm_command": false 改为 "npm_command": "D:\\Program Files\\nodejs\\npm.cmd" ，保存文件
+5. 编写一个测试文件test.js，按“ctrl+B"运行代码
+
+## Node
+
+### 使用mysql
+
+步骤:
+
+1. 创建一个新项目：`mkdir mysql-test && cd mysql-test`
+2. 创建一个 package.json 文件：`npm init -y`
+3. 安装mysql模块: `npm install mysql –save`
+4. 创建一个app.js文件并将下面的代码段复制进去。
+
+   ```javascript
+   // app.js:
+   const mysql = require('mysql')
+   const connection = mysql.createConnecntion({
+      host:'localhost',
+      user:'user',
+      password:'password',
+      database:''
+   )}
+   //建立SQL链接
+   connection.connection(err=>{
+   if(err)throw err;
+   console.log('connented';})
+   connection.end(err=>{})
+   ```
+
+5. 运行该文件: `node app.js`。会看到一条 “Connected!”(已连接上了)消息。
+
+#### 使用grunt自动化
+
+监听文件修改`grunt-contrib-watch` 都会运行已经预定义好的任务，并且会使用 `grunt-execute` 来运行 `node app.js` 命令。
+
+```javascript
+//SQL查询
+connection.query('SELECT*FROM employee',(err,rows)=>{
+//查询操作
+})
+//insert查询
+const obj = {}
+connection.query(INSERT INTO employee SET ?',obj,(err,rows)=>{
+//查询操作
+})
+
+```
