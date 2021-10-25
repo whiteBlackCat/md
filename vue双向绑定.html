@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVVM</title>
+    <script>
+      // 发布者
+      class Vue {
+        constructor(options) {
+          this.options = options;
+          this.$el = document.querySelector(options.el);
+          this.$data = options.data;
+          this._directives = {}; // 存放订阅者
+          this.Observer(this.$data);
+          this.Compile(this.$el);
+        }
+        // 劫持数据
+        Observer(data) {
+          for (let key in data) {
+            this._directives[key] = [];
+            // 订阅者变化时,触发视图更新
+            let val = data[key];
+            let watch = this._directives[key];
+            Object.defineProperty(this.$data, key, {
+              get: function() {
+                return val;
+              },
+              set: function(newVal) {
+                if (newVal !== val) {
+                  val = newVal;
+                  watch.forEach(item => {
+                    item.update();
+                  });
+                }
+              }
+            });
+          }
+        }
+        // 解析指令
+        Compile(el) {
+          let nodes = el.children;
+          for (let i = 0; i < nodes.length; i++) {
+            let node = nodes[i];
+            if (node.children.length) {
+              this.Compile(node);
+            }
+            if (node.hasAttribute('v-text')) {
+              let attrVal = node.getAttribute('v-text');
+              // 订阅者(指令值)存放订阅者实例用于更新视图
+              this._directives[attrVal].push(
+                new Watcher(node, attrVal, this, 'innerHTML')
+              );
+            }
+            if (node.hasAttribute('v-model')) {
+              let attrVal = node.getAttribute('v-model');
+              // 订阅者(指令值)存放订阅者实例用于更新视图
+              this._directives[attrVal].push(
+                new Watcher(node, attrVal, this, 'value')
+              );
+              // 监听视图变化,更改数据(订阅者)
+              let _this = this;
+              node.addEventListener(
+                'input',
+                (function() {
+                  return function() {
+                    _this.$data[attrVal] = node.value;
+                  };
+                })()
+              );
+            }
+          }
+        }
+      }
+      // 订阅者
+      class Watcher {
+        constructor(el, vm, mySelf, attr) {
+          this.el = el;
+          this.vm = vm;
+          this.mySelf = mySelf;
+          this.attr = attr;
+          this.update(); // 初始化数据
+        }
+        update() {
+          console.log(this.el, this.attr);
+          console.log(this.mySelf[this.vm]);
+          this.el[this.attr] = this.mySelf.$data[this.vm];
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>数据响应式</h1>
+      <div>
+        <div v-text="myText"></div>
+        <input type="text" v-model="myText" />
+      </div>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          myText: '大吉大利,今晚吃鸡!'
+        }
+      });
+    </script>
+  </body>
+</html>

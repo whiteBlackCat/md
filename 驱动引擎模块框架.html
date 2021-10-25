@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 框架应该与业务分开,也应该与降低依赖
+      var ModuleDriver = (function(global, factory) {
+        return factory.call(global);
+      })(window, function() {
+        // 闭包保护代码
+        var __MODULES__ = {};
+        var __CORE__ = {
+          module: function(view, render) {
+            return {
+              model: null,
+              render: render,
+              view: document.getElementById(view)
+            };
+          },
+          init: function(data, modules) {
+            // 初始化工作
+            __MODULES__ = {};
+            for (var module in modules) {
+              __MODULES__[module] = modules[module];
+            }
+            // ...
+            this.load(data);
+          },
+          // 装载数据
+          laod: function(data) {
+            this.fetch(data);
+            this.render();
+          },
+          // 模块填充数据
+          fetch: function(data) {
+            for (var module in data) {
+              __MODUlES__[module].model = data[module];
+            }
+          },
+          // 渲染模块数据
+          render: function() {
+            for (var modlue in __MODULES__) {
+              __MODULES__[module].render();
+            }
+          }
+        };
+        return __CORE__;
+      });
+    </script>
+    <script>
+      $.getJSON('data.json', function(meta) {
+        var data = meta;
+        ModuleDriver.init(data, {
+          detail: ModuleDriver.module('#view1', function() {
+            // console.log('module render ...');
+            var $view = $(this.view);
+            for (var prop in this.model) {
+              $('#' + prop, $view).text(this.model[prop]);
+            }
+          })
+        });
+      });
+    </script>
+  </body>
+</html>

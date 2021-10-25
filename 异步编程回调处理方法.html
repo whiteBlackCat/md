@@ -1,0 +1,155 @@
+<!-- 
+  事件池实现一对多事件模型
+  callbackList增强:
+  add():容器中增加处理函数
+  fire():从左至右执行容器中所有处理函数
+    参数:
+      stopOnfalse:可选,处理函数若返回false,终止后续处理函数
+      once:默认fire调用后关闭容器,add添加容器的处理函数不会执行
+      memory:可选,fire调用后开放容器,add添加的处理函数会立即执行
+ -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script>
+      (function(root) {
+        var optionsCache = {};
+        var spaceExp = /s+/;
+        var _ = {
+          callbackList: function(options) {
+            options =
+              typeof options === 'string'
+                ? optionsCache[options] || createOptions(optiopns)
+                : {};
+            var list = [];
+            var index, length, memory, start, testing;
+            var fire = function(data) {
+              // console.log(data);
+              index = start || 0; // 解决add后调用全部函数
+              start = 0;
+              length = list.length;
+              memory = options.memory && data;
+              testing = true; // 处理函数是否调用过
+              for (; index < length; index++) {
+                // 参数传递处理函数
+                if (
+                  list[index].apply(data[0], data[1]) === false &&
+                  options.stopOnfalse
+                ) {
+                  break;
+                }
+              }
+            };
+            var self = {
+              add: function() {
+                var args = Array.prototype.slice(arguments);
+                start = list.length;
+                args.forEach(function(fn) {
+                  if (toString.call(fn) === '[object Function]') {
+                    list.push(fn);
+                  }
+                });
+                memory && fire(memory);
+                return this;
+              },
+              // 处理函数绑定上下文
+              fireWith: function(context, arguments) {
+                var args = [context, arguments];
+                if (!options.once || !testing) {
+                  fire(args);
+                }
+              },
+              // 处理函数参数的绑定
+              fire: function() {
+                self.fireWith(this, arguments);
+              },
+              // 状态管理
+              state: function() {
+                var _this = this;
+                var promise = {
+                  promise: function(obj) {
+                    return typeof obj === 'object'
+                      ? Object.assign(obj, promise)
+                      : promise;
+                  }
+                };
+                // 状态集合
+                var tuples = [
+                  [
+                    'resolve',
+                    'done',
+                    _this.callbackList('once memory'),
+                    'resolve'
+                  ],
+                  [
+                    'reject',
+                    'fail',
+                    _this.callbackList('once memory'),
+                    'reject'
+                  ],
+                  ['notify', 'progress', _this.callbackList('once memory')]
+                ];
+                var state = {};
+                tuple.forEach(function(tuple) {
+                  var list = _this.callbackList('once memory');
+                  state[tuple[0]] = list.fire;
+                  state[tuple[0] + 'With'] = list.fire;
+                  promise[tuple[1]] = list.add;
+                });
+                promise.promise(state);
+                return state;
+              },
+              when: function(state) {
+                return state.promise();
+              }
+            };
+            return self;
+          }
+        };
+        function createOptions(options) {
+          var object = (optionsCache[options] = {});
+          options.split(spaceExp).forEach(function(value) {
+            object[value] = true;
+          });
+          return object;
+        }
+      })(this);
+    </script>
+    <script>
+      var callbackList = _.callbackList('memory');
+      callbackList.add(function() {
+        console.log('hahaha111');
+      });
+      callbackList.fire();
+      // callbackList.add(function() {
+      //   console.log('hahaha222');
+      // });
+      // callbackList.fire();
+
+      var wait = function() {
+        var state = _.state();
+        var test = function() {
+          console.log('视频照灿灿');
+          state.reject();
+        };
+        return state;
+      };
+
+      _.when(wait())
+        .done(function() {
+          console.log('成功');
+        })
+        .fail(function() {
+          console.log('失败');
+        })
+        .fail(function() {
+          console.log('又失败');
+        });
+    </script>
+  </head>
+  <body></body>
+</html>
