@@ -1,3 +1,5 @@
+# webstorm快捷键
+
 ctrl + shift + n: 打开工程中的文件，目的是打开当前工程下任意目录的文件。
 ctrl + j: 输出模板
 ctrl + alt + T: 围绕包裹代码(包括zencoding的Wrap with Abbreviation)
@@ -56,27 +58,27 @@ F2 或Shift+F2 高亮错误或警告快速定位
 Ctrl+W 选中代码，连续按会有其他效果
 选中文本，按Alt+F3 ，逐个往下查找相同文本，并高亮显示。
 Ctrl+Up/Down 光标跳转到第一行或最后一行下
-Ctrl+/ 或 Ctrl+Shift+/	注释（// 或者/*…*/ ）
-Shift+F6	重构-重命名
-Ctrl+X	删除行
-Ctrl+D	复制行
-Ctrl+G	查找行
-Ctrl+Shift+Up/Down	代码向上/下移动。
-F2 或Shift+F2	高亮错误或警告快速定位
-Ctrl+B	快速打开光标处的类或方法
-Ctrl+E	最近打开的文件
-Alt+F1	查找代码所在位置
-Ctrl+Alt+L	格式化代码
-Ctrl+R	替换文本
-Ctrl+F	查找文本
-Ctrl+P	方法参数提示
-Ctrl+shift+c	拷贝文件路径
-Ctrl+alt+shift+c	拷贝相关数据 包括路径和所在行
-Ctrl+shift+v	从历史记录中粘贴
-ctrl+Y    删除整行                       
-ctrl+shift+enter	新建行
-ctrl+alt+enter	在当前行前面新建行
- 
+Ctrl+/ 或 Ctrl+Shift+/ 注释（// 或者/*…*/ ）
+Shift+F6 重构-重命名
+Ctrl+X 删除行
+Ctrl+D 复制行
+Ctrl+G 查找行
+Ctrl+Shift+Up/Down 代码向上/下移动。
+F2 或Shift+F2 高亮错误或警告快速定位
+Ctrl+B 快速打开光标处的类或方法
+Ctrl+E 最近打开的文件
+Alt+F1 查找代码所在位置
+Ctrl+Alt+L 格式化代码
+Ctrl+R 替换文本
+Ctrl+F 查找文本
+Ctrl+P 方法参数提示
+Ctrl+shift+c 拷贝文件路径
+Ctrl+alt+shift+c 拷贝相关数据 包括路径和所在行
+Ctrl+shift+v 从历史记录中粘贴
+ctrl+Y    删除整行
+ctrl+shift+enter 新建行
+ctrl+alt+enter 在当前行前面新建行
+
 link:css => 引入css文件  :属性  script:src,html:5,a:link,a:mail
-form:get	get表单
-input:hidden	hidden输入框
+form:get get表单
+input:hidden hidden输入框

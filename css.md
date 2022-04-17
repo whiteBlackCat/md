@@ -1,19 +1,19 @@
-border-radius不允许负数（失效）最大50%大于
-Clip：rect (top, right, bottom, left)|auto|inherit  裁剪窗口（目标）距左上距离（left>right 区域为0）窗口外内容不显示（内容应指文字，图片 背景不算）注意！！！目前试验知需配合position:absolute/fixed;
-图片合并技术（css Sprite）许多小图整合到大图（节省资源）。IE6不支持Alpha透明通道的png图片（表现蓝背景），尽管filter可修复（却不支持背景定位？）。此时考虑img配合clip属性
-background-position的百分比：bgi与box的差值取为100%
-Border 不设颜色为initial，会与字体同色
-Background：none清默认（默认不总是无属性）
-Webkit-appearance  修改成各种默认样式外观，如按钮（不规范属性 ）
 
-Placeholder  颜色修改：
-WebKit和Blink：::-webkit-input-placeholder 
-Mozilla Firefox 19+：::-moz-placeholder 
-IE10: :-ms-input-placeholder 
-
-img内容部分（同结构加载），background-image（晚）修饰性。
+- border-radius不允许负数（失效）最大50%
+- Clip：rect (top, right, bottom, left)|auto|inherit  裁剪窗口（目标）距左上距离（left>right 区域为0）窗口外内容不显示（内容应指文字，图片 背景不算）注意！！！目前试验知需配合position:absolute/fixed;
+- 图片合并技术（css Sprite）许多小图整合到大图（节省资源）。IE6不支持Alpha透明通道的png图片（表现蓝背景），尽管filter可修复（却不支持背景定位？）。此时考虑img配合clip属性
+- background-position的百分比：bgi与box的差值取为100%
+- Border 不设颜色为initial，会与字体同色
+- Background：none清默认（默认不总是无属性）
+- Webkit-appearance  修改成各种默认样式外观，如按钮（不规范属性 ）
+- Placeholder  颜色修改：
+  WebKit和Blink：::-webkit-input-placeholder
+  Mozilla Firefox 19+：::-moz-placeholder
+  IE10: :-ms-input-placeholder
+- img内容部分（同结构加载），background-image（晚）修饰性。
 图片类型：base64  雪碧图（减少http请求） webp（压缩比稿） svg
 使用方式：普通图片（无任何要求） 等宽高比
+
 Q：图片加载延迟导致页面抖动
 A：利用padding占位（以%形式，注意宽高比，图片绝对定位）
 优化总结：
@@ -30,7 +30,7 @@ A：利用padding占位（以%形式，注意宽高比，图片绝对定位）
 在纵向，文本排布主要受line-height属性影响，在有行内盒参与的情况下就复杂了，
 
 一个行内盒的vertical-align可以有这样几种取值：
-baseline sub super top text-top middle bottom text-bottom 
+baseline sub super top text-top middle bottom text-bottom
 
 link与@import
 引入样式表    style内@import url(‘.css’)  要求最上方
@@ -47,7 +47,6 @@ shape：渐变的形状，ellipse表示椭圆形，circle表示圆形。默认�
 size：渐变到哪里停止 closest-side：最近边； farthest-side：最远边； closest-corner：最近角； farthest-corner：最远角
 div { background: radial-gradient(red 5%, green 15%, blue 60%); }不均匀变色
 
-
 a的color属性：
 当a无href时可继承（此时不具有锚点作用），有href时不可继承，color：inherit在IE7以下不支持
 
@@ -56,10 +55,8 @@ Css nesting用法：建议在同一个选择器上
 :hover{}
 :link{}
 }
-不建议为省字节而在父子级selector上使用（不便于搜索） 
+不建议为省字节而在父子级selector上使用（不便于搜索）
 &用法：快速代替父级selector
-
-
 
 滚动条消失：
 html { -ms-overflow-style:none; overflow:-moz-scrollbars-none; }
@@ -77,7 +74,7 @@ Date,month,week,time,datetime,datetime-local
 
 表单共有属性（filedset外）：
 Disabled（表单提交后禁用可防止重复提交），form，name，readOnly，tabIndex，type，value
-单选type“select-one”  多选type“select-multiple” 
+单选type“select-one”  多选type“select-multiple”
 <button><button type=”submit”>  type“submit”  会触发提交
 <button type=”button”>type”button”  reset-reset  不会触发提交
 
@@ -123,10 +120,10 @@ Vw
 
 Object Oriented CSS  主要原则：  分离结构和皮肤 / 容器和内容
 CSS格式
+
 1. OOCSS，双class，如：class="box box-#"，基本的CSS样式在class box中，然后直添加背景样式在唯一的class中。
 2. Sass @extend ，一个class，如class="box-3"，然后在基本规则上创建一个多选择器规则，如.box-1, .box-2 {generics}。
 3. 嚣张的CSS 添加所有的基本CSS到一个唯一的class上，没有“瘦身”。
-
 
 资源加载优化:
 按需加载(评估业务),Lazyload,滚屏加载,Media Query,第三方资源异步加载
@@ -223,9 +220,9 @@ color-stop: <color length>形式
 每英寸的实际像素值（ppi）
 
 字体系列：
-serif（成比例，有衬线）：Times，Garamond，New Century Schoolbook   
+serif（成比例，有衬线）：Times，Garamond，New Century Schoolbook
 Sans serif（比例，无衬线）Helvertica，Geneva，Verdant，Arial，Univers
-Mono space（无比例）Courier，Andale Mono   
+Mono space（无比例）Courier，Andale Mono
 Cursive（模拟）Zapf Chancery，Author，Comic Sans    Fantasy
 
 auto：流体特性根据剩余分配   当限制过于约束时，后侧（这根书写方向有关）被强制设成auto   width与margin同设auto，margin优先变成0
@@ -237,8 +234,6 @@ z-index层叠顺序：同级相比，后辈元素（不论z-index高低）与相
 display：compact 足够空间就显示下一个元素？？？   run-in：两个块级元素拼合成一个块级（其中内容以内联元素处理）
 font-size-adjust不同字体近似大小    font-stretch字体宽度调整
 
-
-
 label的for属性与表单的id属性结合应用1:
 上传input隐藏(display及.clip类名),label添加样式
     .clip {  
@@ -246,53 +241,53 @@ label的for属性与表单的id属性结合应用1:
       clip: rect(0 0 0 0);
     }
 
-		.btn {
-			padding: 1em 2em;
-			border: 2px solid;
-			border-bottom-width: 4px;
-			transition: color 1s;
-		}
-		.btn4 {
-			color: #eea163;
-		}
+  .btn {
+   padding: 1em 2em;
+   border: 2px solid;
+   border-bottom-width: 4px;
+   transition: color 1s;
+  }
+  .btn4 {
+   color: #eea163;
+  }
 
-		.btn4:hover {
-			animation: zigzag 1s linear infinite;
-			background:
-				linear-gradient(135deg, rgba(238, 161, 99, .25) .25em, transparent .25em) -.5em 0,
-				linear-gradient(225deg, rgba(238, 161, 99, .25) .25em, transparent .25em) -.5em 0,
-				linear-gradient(315deg, rgba(238, 161, 99, .25) .25em, transparent .25em) 0 0,
-				linear-gradient(45deg, rgba(238, 161, 99, .25) .25em, transparent .25em) 0 0;
-			background-size: 0.75em 0.75em;
-			color: #63b0ee;
-		}
+  .btn4:hover {
+   animation: zigzag 1s linear infinite;
+   background:
+    linear-gradient(135deg, rgba(238, 161, 99, .25) .25em, transparent .25em) -.5em 0,
+    linear-gradient(225deg, rgba(238, 161, 99, .25) .25em, transparent .25em) -.5em 0,
+    linear-gradient(315deg, rgba(238, 161, 99, .25) .25em, transparent .25em) 0 0,
+    linear-gradient(45deg, rgba(238, 161, 99, .25) .25em, transparent .25em) 0 0;
+   background-size: 0.75em 0.75em;
+   color: #63b0ee;
+  }
 
-		@keyframes zigzag {
-			to {
-				background-position: 1em 0, 1em 0, -0.75em 0, -0.75em 0;
-			}
-		}
+  @keyframes zigzag {
+   to {
+    background-position: 1em 0, 1em 0, -0.75em 0, -0.75em 0;
+   }
+  }
 
-		.btn6 {
-			color: #f9879b;
-		}
+  .btn6 {
+   color: #f9879b;
+  }
 
-		.btn6:hover {
-			animation: pulse 1s ease-in infinite;
-			background: radial-gradient(circle, rgba(249, 135, 155, .25) 43%, rgba(0, 0, 0, 0) 50%) 0 0/1em 1em, radial-gradient(circle, rgba(249, 135, 155, .25) 43%, rgba(0, 0, 0, 0) 50%) .5em .5em/2em 2em;
-			color: #0bdcb7;
-		}
+  .btn6:hover {
+   animation: pulse 1s ease-in infinite;
+   background: radial-gradient(circle, rgba(249, 135, 155, .25) 43%, rgba(0, 0, 0, 0) 50%) 0 0/1em 1em, radial-gradient(circle, rgba(249, 135, 155, .25) 43%, rgba(0, 0, 0, 0) 50%) .5em .5em/2em 2em;
+   color: #0bdcb7;
+  }
 
-		@keyframes pulse {
-			50% {
-				background-position: 0.66em 0.66em, -0.33em -0.33em;
-			}
+  @keyframes pulse {
+   50% {
+    background-position: 0.66em 0.66em, -0.33em -0.33em;
+   }
 
-			100% {
-				background-size: 2em 2em, 1em 1em;
-				background-position: -1.5em -1.5em, -1em -1em;
-			}
-		}
+   100% {
+    background-size: 2em 2em, 1em 1em;
+    background-position: -1.5em -1.5em, -1em -1em;
+   }
+  }
 
 多行文本省略:
      width: 50px;
