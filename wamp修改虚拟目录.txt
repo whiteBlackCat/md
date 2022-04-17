@@ -1,0 +1,37 @@
+准备：
+1、关闭浏览器代理
+2、若wamp环境变化产生意外，请重新安装
+步骤：
+1、确保localhost为wamp页面（wamp配置信息也）
+2、wamp/bin/apache/apache2.4.9/conf/httpd.conf   开启虚拟站点
+# Virtual hosts Include conf/extra/httpd-vhosts.conf
+打开rewrite模块 找到LoadModule rewrite_modules/mod_rewrite.so
+去掉前面的注释
+3、wamp/bin/apache/apache2.4.9/conf/extra/httpd-  vhosts.conf文件，	做如下修改：
+<VirtualHost *:80>
+  DocumentRoot “D:/Program Files/wamp/wamp/www/learnlaravel15/public/”
+  ServerName d.com
+  <Directory “D:/Program Files/wamp/wamp/www/learnlaravel15/public/”
+>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+</VirtualHost>
+80端口是默认的端口，即改域名应为d.com。???
+DocumentRoot为虚拟站点对应的目录
+ServerName为虚拟站点对应的域名
+4、本地hosts文件修改 打开C:Windows/System32/drivers/etc/hosts文件：
+ 添加一行    127.0.0.1       d.com   然后保存。
+5、修改localhost虚拟目录
+<VirtualHost *:80>
+  DocumentRoot “D:/Program Files/wamp/wamp/www/”
+  ServerName localhost
+  <Directory “D:/Program Files/wamp/wamp/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+</VirtualHost>

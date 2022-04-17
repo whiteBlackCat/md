@@ -1,0 +1,37 @@
+系统变量下的用户变量path添加wamp bin目录:开启mysql功能图标
+设置apache文件根目录: php.ini中  doc_root = ...htdocs
+开启数据库 extension=php_mysqli.dll  开头无分号
+session.save_path="C:\Window\Temp" ??
+
+apache configuration
+<IfModule dir_module>
+  DirectoryIndex index.html index.php  //默认启动文件
+</IfModule>
+在apache建立配置:
+LoadMoudle php5_module "c:/PHP/php5apache2_2.dll"
+AddType application/x-httpd-php .php
+PHPIniDir "C:/PHP"
+
+phpstorm:($_POST获取数据)
+always_populate_raw_post_data = -1 前分号去掉(不推荐直接使用raw_data,获取表单数据使用file_get_contents(“php://input”))
+enable_post_data_reading = On  允许$_POST获取数据
+
+将apache服务映射到phpstorm:(phpstorm是个编辑器,并不具有php处理功能,仍然需要wamp提供,这样就需要将PHP项目目录映射到wamp服务器,便于php编辑,wamp支持)
+（1）首先将apache服务器目录映射到本地目录
+做法如下:
+1. 找到 /xampp/apache/conf/httpd.conf 文件
+2. 找到 <IfModule alias_module> </ifModule> 代码块
+3. 在<IfModule alias_module>的子级加上如下代码:
+# /phpworkspace/ : 其它磁盘上目录的别名, 就是你想映射过来的目录的别名  
+# "E:/phpworkspace/" : 这个是目录的绝对路径  
+Alias /phpworkspace/ "E:/phpworkspace/"  
+# 现在就可以通过 //localhost/phpworkspace/ 访问到 E盘下phpworkspace文件夹里的项目了  
+4. 
+在与 <ifModule alias_module> 同级的地方加上一段代码, 如下：
+<Directory "E:/phpworkspace/">  
+    AllowOverride All  
+    Options Indexes FollowSymLinks Includes ExecCGI  
+    Require all granted  
+</Directory>  
+
+完工. 现在重启Apache, 访问 : http://localhost/phpworkspace/ 就可以了

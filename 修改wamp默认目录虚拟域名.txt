@@ -1,0 +1,52 @@
+修改默认网站目录
+第一步：修改d:\wamp\bin\apache\Apache2.4.9\conf\httpd.conf
+查找： DocumentRoot "c:/wamp/www/"   修改： DocumentRoot "d:/www/"
+查找： <Directory "c:/wamp/www/">    修改： <Directory "d:/www/">
+第二步：修改wampmanager.ini和wampmanager.tpl
+1、修改c:\wamp\wampmanager.ini:
+(1)打开：c:\wamp\wampmanager.ini
+(2)查找：Type: item; Caption: "www 目录"; Action: shellexecute; FileName: "c:/wamp/www"; Glyph: 2
+(3)修改：Type: item; Caption: "www 目录"; Action: shellexecute; FileName: "d:/www"; Glyph: 2
+2、修改c:\wamp\wampmanager.tpl：
+(1)打开：c:\wamp\wampmanager.tpl
+(2)查找：Type: item; Caption: "${w_wwwDirectory}"; Action: shellexecute; FileName: "${wwwdir}"; Glyph: 2
+(3)修改：Type: item; Caption: "${w_wwwDirectory}"; Action: shellexecute; FileName: "d:/www"; Glyph: 2
+ 
+配置虚拟目录
+1、先打开apache的配置文件httpd.conf,搜索关键词:vhost,找到所在行并去掉#Include conf/extra/httpd-vhosts.conf前面的#号
+2、打开apache的apache/conf/extra下的次配置文件httpd-vhosts.conf
+将此文件下的原有的扩展配置文件(如下):删除一个或两个
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host.example.com
+    DocumentRoot "c:/Apache24/docs/dummy-host.example.com"
+    ServerName dummy-host.example.com
+    ServerAlias www.dummy-host.example.com
+    ErrorLog "logs/dummy-host.example.com-error.log"
+    CustomLog "logs/dummy-host.example.com-access.log" common
+</VirtualHost>
+
+3、在httpd-vhosts.conf文件的末尾添加上:
+<VirtualHost *:80>
+    DocumentRoot d:/wamp/website/a.com
+    ServerName www.a.com
+    <Directory "d:/wamp/website/a.com">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+4、打开在c:/WINDOWS/system32/drivers/etc中的hosts文件中加上如下的内容
+127.0.0.1    www.a.com
+5、这样我们就配置好了名为wamp的虚拟主机,重启一下我们在浏览器中输入wamp就可以查看到d:/wamp/www目录下的内容了!!
+6、但是这样localhost访问则出现了问题,这时需要我们,同样将localhost设为虚拟主机
+<VirtualHost *:80>
+    DocumentRoot d:/wamp/www
+    ServerName localhost
+    <Directory "d:/wamp/www">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
